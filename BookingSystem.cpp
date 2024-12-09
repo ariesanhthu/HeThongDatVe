@@ -1,35 +1,52 @@
 ﻿#include "BookingSystem.h"
-
-// Khởi tạo con trỏ tĩnh instance là nullptr
+#include "FactoryUser.h"
+//==============================================
 BookingSystem* BookingSystem::instance = nullptr;
+//==============================================
 
-// Hàm dựng
-BookingSystem::BookingSystem() {
+BookingSystem::BookingSystem() 
+{
     quanLyChuyenXe = nullptr;
     quanLyXe = nullptr;
     quanLyVe = nullptr;
+    quanLyTaiKhoan = new QuanLyTaiKhoan();
     //thongKe = nullptr;
+
+    cout << "He thong da duoc khoi tao thanh cong!\n";
 }
 
 // Lấy instance duy nhất của BookingSystem
-BookingSystem* BookingSystem::getInstance() {
+BookingSystem* BookingSystem::getInstance() 
+{
     if (instance == nullptr) {
         instance = new BookingSystem();
     }
     return instance;
 }
 
-// Khởi tạo các module
-void BookingSystem::initSystem() {
-    quanLyChuyenXe = new QuanLyChuyenXe();
-    quanLyXe = new QuanLyXe();
-    quanLyVe = new QuanLyVe();
-    //thongKe = new ThongKe();
+// Khởi tạo và thêm data
+void BookingSystem::initData()
+{
+    //QuanLyTaiKhoan* manager = ;
 
-    cout << "Hệ thống đã được khởi tạo thành công." << endl;
+    //// Tạo người dùng
+    //User* admin = FactoryUser::createUser("Admin", "admin_user", "admin_pass");
+    //User* client = FactoryUser::createUser("Client", "client_user", "client_pass");
+
+    //// Quản lý tài khoản
+    //manager->addUser(admin);
+    //manager->addUser(client);
+
+    //// Hiển thị thông tin
+    //admin->displayInfo();
+    //client->displayInfo();
+    instance->getQuanLyTaiKhoan()->addUser(FactoryUser::createUser("Admin", "admin", "admin123"));
+    instance->getQuanLyTaiKhoan()->addUser(FactoryUser::createUser("Client", "client", "client123"));
+    instance->getQuanLyTaiKhoan()->findUser("admin")->displayInfo();
 }
 
-// Giao diện CLI
+//
+// //Giao diện CLI
 //void BookingSystem::run() {
 //    cout << "=== Hệ Thống Đặt Vé Xe Khách ===" << endl;
 //    int choice;
@@ -72,5 +89,5 @@ BookingSystem::~BookingSystem() {
     delete quanLyVe;
     //delete thongKe;
 
-    cout << "Hệ thống đã được giải phóng." << endl;
+    cout << "He thong da duoc huy!" << endl;
 }

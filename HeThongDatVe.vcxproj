@@ -128,15 +128,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BookingSystem.h" />
+    <ClInclude Include="FactoryUser.h" />
+    <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="MenuState.h" />
     <ClInclude Include="QuanLyChuyenXe.h" />
+    <ClInclude Include="QuanLyTaiKhoan.h" />
     <ClInclude Include="QuanLyVe.h" />
     <ClInclude Include="QuanLyXe.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BookingSystem.cpp" />
+    <ClCompile Include="FactoryUser.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="QuanLyChuyenXe.cpp" />
+    <ClCompile Include="QuanLyTaiKhoan.cpp" />
     <ClCompile Include="QuanLyVe.cpp" />
     <ClCompile Include="QuanLyXe.cpp" />
     <ClCompile Include="User.cpp" />

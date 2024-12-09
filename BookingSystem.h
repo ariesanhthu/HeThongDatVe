@@ -1,11 +1,10 @@
 ﻿#pragma once
-#ifndef BOOKING_SYSTEM_H
-#define BOOKING_SYSTEM_H
-
 #include <iostream>
 #include "QuanLyChuyenXe.h"
 #include "QuanLyXe.h"
 #include "QuanLyVe.h"
+#include "QuanLyTaiKhoan.h"
+
 //#include "ThongKe.h"
 //#include "FileHandler.h"
 
@@ -20,6 +19,7 @@ private:
     QuanLyChuyenXe* quanLyChuyenXe;
     QuanLyXe* quanLyXe;
     QuanLyVe* quanLyVe;
+    QuanLyTaiKhoan* quanLyTaiKhoan;
     //ThongKe* thongKe;
 
     // Hàm dựng private để tránh tạo đối tượng từ bên ngoài
@@ -33,14 +33,25 @@ public:
     // Phương thức tĩnh để lấy instance
     static BookingSystem* getInstance();
 
-    // Phương thức khởi tạo các module
-    void initSystem();
+    static void DeleteInstance()
+    {
+        if (instance)
+        {
+            delete instance;
+            instance = NULL;
+        }
+    }
 
+    //Khởi tạo và thêm dữ liệu cho chương trình
+    void initData();
+    
     // Giao diện CLI
     void run();
+
+    QuanLyTaiKhoan* getQuanLyTaiKhoan() {
+        return quanLyTaiKhoan;
+    }
 
     // Hủy tài nguyên
     ~BookingSystem();
 };
-
-#endif // BOOKING_SYSTEM_H

@@ -1,12 +1,22 @@
+﻿/*
+MSSV: 23127266
+Họ và tên: Nguyễn Anh Thư
+
+------BOOKING TICKET SYSTEM------
+
+*/
+#include "FactoryUser.h"
 #include "BookingSystem.h"
 
-int main() 
-{
-    BookingSystem* system = BookingSystem::getInstance();
+int main() {
+    //BookingSystem::getInstance();
 
-    system->initSystem();
+    BookingSystem::getInstance()->initData();
 
-    system->run();
+    //system->run();
+    
+    // HỦY ĐỐI TƯỢNG SINGLETON
+    BookingSystem::DeleteInstance();
 
     return 0;
 }
