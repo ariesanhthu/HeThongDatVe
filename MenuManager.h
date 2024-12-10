@@ -1,15 +1,15 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
+#include "MenuState.h"
 
 using namespace std;
 
+// Forward declaration
+class MenuState;
 
-//// Forward declaration
-//class MenuState;
-//class MenuManager;
-
-// Context Class
+// MenuManager manages the current state and displays the menu
 class MenuManager
 {
 private:
@@ -18,7 +18,8 @@ private:
 public:
     MenuManager();
     ~MenuManager();
+
     void setState(MenuState* state);
-    void run();
     void displayMenu();
 };
+
