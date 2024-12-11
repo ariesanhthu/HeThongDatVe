@@ -2,6 +2,9 @@
 #include <string>
 #include <vector>
 #include "Service.h"
+#include <iostream>
+
+#include <fstream>
 
 using namespace std;
 
@@ -15,7 +18,7 @@ private:
 public:
     Xe();
 
-    Xe(const  string& bienSo, const  string& loai, int soCho, const vector<Service>& services);
+    Xe(const  string& bienSo, const  string& loai, int soCho);
 
     ~Xe();
 
@@ -30,5 +33,14 @@ public:
 
     vector<Service> getServices() const;
     void setServices(const vector<Service>& services);
+
+    void addService(const Service& service) { services.push_back(service); }
+
+    void writeToFile(std::ostream& out) const;
+    void readFromFile(std::istream& in);
+
+
+    friend istream& operator>>(istream& is, Xe& xe);
+    friend ostream& operator<<(ostream& os, const Xe& xe);
 };
 

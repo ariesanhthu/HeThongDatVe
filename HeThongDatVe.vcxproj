@@ -130,6 +130,7 @@
     <ClInclude Include="BookingSystem.h" />
     <ClInclude Include="ChuyenXe.h" />
     <ClInclude Include="FactoryUser.h" />
+    <ClInclude Include="FileHandle.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="QuanLyChuyenXe.h" />
@@ -138,12 +139,14 @@
     <ClInclude Include="QuanLyXe.h" />
     <ClInclude Include="Service.h" />
     <ClInclude Include="User.h" />
+    <ClInclude Include="Ve.h" />
     <ClInclude Include="Xe.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BookingSystem.cpp" />
     <ClCompile Include="ChuyenXe.cpp" />
     <ClCompile Include="FactoryUser.cpp" />
+    <ClCompile Include="FileHandle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MenuManager.cpp" />
@@ -153,6 +156,7 @@
     <ClCompile Include="QuanLyXe.cpp" />
     <ClCompile Include="Service.cpp" />
     <ClCompile Include="User.cpp" />
+    <ClCompile Include="Ve.cpp" />
     <ClCompile Include="Xe.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

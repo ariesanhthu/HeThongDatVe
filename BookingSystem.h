@@ -1,14 +1,25 @@
 ﻿#pragma once
+// MENU
+#include "MenuState.h"
+#include "MenuManager.h"
+
 #include <iostream>
+
 #include "QuanLyChuyenXe.h"
 #include "QuanLyXe.h"
 #include "QuanLyVe.h"
 #include "QuanLyTaiKhoan.h"
 
 //#include "ThongKe.h"
-//#include "FileHandler.h"
+
+#include "FactoryUser.h"
+#include "FileHandle.h"
+
 
 using namespace std;
+
+// Forward declaration
+class MenuManager;
 
 class BookingSystem {
 private:
@@ -16,16 +27,22 @@ private:
     static BookingSystem* instance;
 
     // Các module quản lý
-    QuanLyChuyenXe* quanLyChuyenXe;
-    QuanLyXe* quanLyXe;
-    QuanLyVe* quanLyVe;
+    static QuanLyXe* quanLyXe;
+
+    static QuanLyVe* quanLyVe;
+    
+    //static QuanLyTaiKhoan* quanLyTaiKhoan;
     QuanLyTaiKhoan* quanLyTaiKhoan;
+    
+    static QuanLyChuyenXe* quanLyChuyenXe;
+    
+    static MenuManager* currentMenu;
     //ThongKe* thongKe;
 
-    // Hàm dựng private để tránh tạo đối tượng từ bên ngoài
     BookingSystem();
 
 public:
+
     // Xóa các hàm copy constructor và operator=
     BookingSystem(const BookingSystem&) = delete;
     BookingSystem& operator=(const BookingSystem&) = delete;
@@ -33,25 +50,24 @@ public:
     // Phương thức tĩnh để lấy instance
     static BookingSystem* getInstance();
 
-    static void DeleteInstance()
-    {
-        if (instance)
-        {
-            delete instance;
-            instance = NULL;
-        }
-    }
+    static QuanLyXe* getQuanLyXe();
+
+    static QuanLyVe* getQuanLyVe();
+
+    static QuanLyChuyenXe* getQuanLyChuyenXe();
+    
+    static MenuManager* getCurrentMenu();
+
+    static void DeleteInstance();
 
     //Khởi tạo và thêm dữ liệu cho chương trình
     void initData();
     
-    // Giao diện CLI
     void run();
 
     QuanLyTaiKhoan* getQuanLyTaiKhoan() {
         return quanLyTaiKhoan;
     }
 
-    // Hủy tài nguyên
     ~BookingSystem();
 };

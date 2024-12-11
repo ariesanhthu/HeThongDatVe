@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include <string>
 #include "Xe.h"
+#include <iostream>
+
+#include <fstream>
 
 using namespace std;
 
@@ -9,9 +12,12 @@ private:
     string ID;
     string diemDi;
     string diemDen;
-    string ngay; // Định dạng chuỗi, có thể thay bằng ` chrono::date` nếu cần
-    string gio;  // Định dạng chuỗi, có thể thay bằng ` chrono::time`
-    int giaVeCoBan;
+    string ngay; 
+    string gio;  
+    double giaVeCoBan;
+
+    // đặt vé thành công thông báo để thay đổi số vé còn lại
+    // khởi tạo bằng số chỗ ngồi của xe
     int soVeConLai;
     Xe* xe; 
 
@@ -36,12 +42,21 @@ public:
     string getGio() const;
     void setGio(const  string& gio);
 
-    int getGiaVeCoBan() const;
-    void setGiaVeCoBan(int gia);
+    double getGiaVeCoBan() const;
+    void setGiaVeCoBan(double gia);
 
     int getSoVeConLai() const;
     void setSoVeConLai(int soVe);
 
     Xe* getXe() const;
     //void setXe(const Xe& xe);
+
+     // Overloading << và >>
+    friend ostream& operator<<(ostream& os, const ChuyenXe& cx);
+    friend istream& operator>>(istream& is, ChuyenXe& cx);
+
+    //file
+
+    void readFromFile(ifstream& inFile);
+    void writeToFile(ofstream& outFile) const;
 };

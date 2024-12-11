@@ -1,4 +1,3 @@
-#pragma once
 #include "MenuManager.h"
 
  //Implementation of MenuManager

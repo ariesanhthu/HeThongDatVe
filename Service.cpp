@@ -21,3 +21,21 @@ int Service::getGiaTien() const {
 void Service::setGiaTien(int gia) {
     giaTien = gia;
 }
+
+
+void Service::writeToFile(std::ostream& out) const
+{
+    size_t nameSize = name.size();
+    out.write(reinterpret_cast<const char*>(&nameSize), sizeof(nameSize));
+    out.write(name.c_str(), nameSize);
+    out.write(reinterpret_cast<const char*>(&giaTien), sizeof(giaTien));
+}
+
+void Service::readFromFile(std::istream& in)
+{
+    size_t nameSize;
+    in.read(reinterpret_cast<char*>(&nameSize), sizeof(nameSize));
+    name.resize(nameSize);
+    in.read(&name[0], nameSize);
+    in.read(reinterpret_cast<char*>(&giaTien), sizeof(giaTien));
+}

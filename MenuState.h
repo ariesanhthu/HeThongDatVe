@@ -1,6 +1,10 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <string>
+
+#include "BookingSystem.h"
+#include "MenuManager.h"
+
 using namespace std;
 
 // Forward declaration
@@ -12,6 +16,7 @@ class MenuState
 public:
     virtual ~MenuState() {}
     virtual void displayMenu(MenuManager& manager) = 0;
+    //virtual void handleInput() = 0;
     void displayMainMenu();
 };
 
@@ -21,7 +26,7 @@ class NotLoggedInState : public MenuState
 public:
     void displayMenu(MenuManager& manager) override;
 };
-
+//
 class LoggedInState : public MenuState
 {
 public:
@@ -33,4 +38,25 @@ class AdminState : public MenuState
 {
 public:
     void displayMenu(MenuManager& manager) override;
+};
+
+
+// ======= QUẢN LÝ ======= 
+
+// MENU QUẢN LÝ CHUYẾN XE
+class MenuChuyenXe : public MenuState
+{
+public:
+    void displayMenu(MenuManager& manager) override;
+};
+
+class MenuQuanLyXe : public MenuState
+{
+public:
+    void displayMenu(MenuManager& menuManager) override;
+};
+
+class MenuQuanLyVe : public MenuState {
+public:
+    void displayMenu(MenuManager& menuManager) override;
 };

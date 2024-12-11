@@ -1,7 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include <iostream>
+
+#include <fstream>
+
 using namespace std;
 
 class User {
@@ -16,9 +19,20 @@ protected:
     string role;
 
 public:
+    User()
+        : username(""), password(""), name(""), phoneNumber(""),
+        email(""), address(""), dateOfBirth(""), role("") {}
+
     User(const string& username, const string& password, const string& role)
         : username(username), password(password), role(role) {}
 
+    User(const string& username, const string& password, const string& name,
+        const string& phoneNumber, const string& email, const string& address,
+        const string& dateOfBirth, const string& role)
+        : username(username), password(password), name(name), phoneNumber(phoneNumber),
+        email(email), address(address), dateOfBirth(dateOfBirth), role(role)
+    {
+    }
     virtual void displayInfo() {
         cout << "Username: " << username << endl;
         cout << "Role: " << role << endl;
@@ -26,37 +40,41 @@ public:
 
     virtual ~User() {}
 
-    // Getter và Setter cho Username
-    std::string getUsername() const;
-    void setUsername(const std::string& value);
+    // Getter vÃ  Setter cho Username
+     string getUsername() const;
+    void setUsername(const  string& value);
 
-    // Getter và Setter cho Password
-    std::string getPassword() const;
-    void setPassword(const std::string& value);
+    // Getter vÃ  Setter cho Password
+     string getPassword() const;
+    void setPassword(const  string& value);
 
-    // Getter và Setter cho Name
-    std::string getName() const;
-    void setName(const std::string& value);
+    // Getter vÃ  Setter cho Name
+     string getName() const;
+    void setName(const  string& value);
 
-    // Getter và Setter cho PhoneNumber
-    std::string getPhoneNumber() const;
-    void setPhoneNumber(const std::string& value);
+    // Getter vÃ  Setter cho PhoneNumber
+     string getPhoneNumber() const;
+    void setPhoneNumber(const  string& value);
 
-    // Getter và Setter cho Email
-    std::string getEmail() const;
-    void setEmail(const std::string& value);
+    // Getter vÃ  Setter cho Email
+     string getEmail() const;
+    void setEmail(const  string& value);
 
-    // Getter và Setter cho Address
-    std::string getAddress() const;
-    void setAddress(const std::string& value);
+    // Getter vÃ  Setter cho Address
+     string getAddress() const;
+    void setAddress(const  string& value);
 
-    // Getter và Setter cho DateOfBirth
-    std::string getDateOfBirth() const;
-    void setDateOfBirth(const std::string& value);
+    // Getter vÃ  Setter cho DateOfBirth
+     string getDateOfBirth() const;
+    void setDateOfBirth(const  string& value);
 
-    // Getter và Setter cho Role
-    std::string getRole() const;
-    void setRole(const std::string& value);
+    // Getter vÃ  Setter cho Role
+     string getRole() const;
+    void setRole(const  string& value);
+
+    // Äá»c vÃ  ghi file
+    void readFromFile(ifstream& inFile);
+    void writeToFile(ofstream& outFile) const;
 };
 
 class Client : public User {
