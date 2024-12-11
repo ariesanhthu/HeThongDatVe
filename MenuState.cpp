@@ -21,15 +21,82 @@ void LoggedInState::displayMenu(MenuManager& manager)
     cout << "4. Dang xuat\n";
     cout << "==== USER AREA ====" << endl;
     cout << "5. Dat ve\n6. Thanh toan\n7. Quan ly ve\n8. Quan ly tai khoan\n";
+    
+    if (BookingSystem::getCurrentUser()->getRole() == "Admin")
+    {
+        cout << "==== ADMIN AREA ====" << endl;
+        cout << "9. Quan ly he thong\n";
+
+    }
 }
 
-void AdminState::displayMenu(MenuManager& manager)
+void MenuLogin::displayMenu(MenuManager& manager)
 {
-    cout << "==== ADMIN AREA ====" << endl;
-    cout << "8. Quan ly he thong\n";
+    system("cls");
+    cout << "\n\n=== LOGIN ===\n";
+    
+    cout << "Nhap username: ";
+    string username;
+    cin >> username;
+    cout << "Nhap password: ";
+    string password;
+    cin >> password;
+
+    User* user = BookingSystem::getQuanLyTaiKhoan()->findUser(username);
+
+    BookingSystem::setCurrentUser(user);
 }
 
 // ======= QUẢN LÝ ======= 
+
+void MenuQuanLy::displayMenu(MenuManager& menuManager)
+{
+    int choice;
+
+    while (true)
+    {
+        system("cls");
+
+        cout << "\n=== Quan Ly He Thong ===\n";
+        cout << "1. Quan ly chuyen xe\n";
+        cout << "2. Quan ly xe\n";
+        cout << "3. Quan ly ve\n";
+        cout << "4. Bao cao thong ke\n";
+        cout << "5. Doc thong tin tu file\n";
+        cout << "0. Quay lai menu chinh\n";
+        cout << "Nhap lua chon cua ban: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1: 
+        {
+            menuManager.setState(new MenuChuyenXe());
+            break;
+        }
+        case 2:
+        {
+            menuManager.setState(new MenuQuanLyXe());
+            break;
+        }
+        case 3:
+        {
+            menuManager.setState(new MenuQuanLyVe());
+            break;
+        }
+        case 0:
+        {
+            menuManager.setState(new NotLoggedInState());
+            return;
+        }
+        default:
+            cout << "Lua chon khong hop le! Hay nhap lai.\n";
+            break;
+        }
+        system("cls");
+        menuManager.displayMenu();
+    }
+}
 
 // MENU QUẢN LÝ CHUYẾN XE
 void MenuChuyenXe::displayMenu(MenuManager& menuManager)

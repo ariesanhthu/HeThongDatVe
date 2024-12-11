@@ -4,6 +4,7 @@
 
 #include "BookingSystem.h"
 #include "MenuManager.h"
+#include <cstdlib>
 
 using namespace std;
 
@@ -34,11 +35,18 @@ public:
 };
 
 //Account
-class AdminState : public MenuState
+//class AdminState : public MenuState
+//{
+//public:
+//    void displayMenu(MenuManager& manager) override;
+//};
+
+class MenuLogin : public MenuState
 {
 public:
     void displayMenu(MenuManager& manager) override;
 };
+
 
 
 // ======= QUẢN LÝ ======= 
@@ -57,6 +65,11 @@ public:
 };
 
 class MenuQuanLyVe : public MenuState {
+public:
+    void displayMenu(MenuManager& menuManager) override;
+};
+
+class MenuQuanLy : public MenuState {
 public:
     void displayMenu(MenuManager& menuManager) override;
 };

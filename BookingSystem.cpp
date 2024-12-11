@@ -8,12 +8,14 @@ BookingSystem* BookingSystem::instance = nullptr;
 QuanLyChuyenXe* BookingSystem::quanLyChuyenXe = nullptr;
 QuanLyXe* BookingSystem::quanLyXe = nullptr;
 QuanLyVe* BookingSystem::quanLyVe = nullptr;
+QuanLyTaiKhoan* BookingSystem::quanLyTaiKhoan = nullptr;
 
 MenuManager* BookingSystem::currentMenu = nullptr;
-
+User* BookingSystem::currentUser = nullptr;
 
 //==============================================
-// KHỞI TẠO CÁC STATIC
+// 
+// KHỞI TẠO STATIC
 BookingSystem::BookingSystem() 
 {
     //2.1 QUẢN LÝ
@@ -30,7 +32,6 @@ BookingSystem::BookingSystem()
         quanLyVe = new QuanLyVe();
 
     quanLyTaiKhoan = new QuanLyTaiKhoan();
-
 
     //thongKe = nullptr;
     
@@ -59,6 +60,10 @@ QuanLyChuyenXe* BookingSystem::getQuanLyChuyenXe()
 {   
     return quanLyChuyenXe;
 }
+QuanLyTaiKhoan* BookingSystem::getQuanLyTaiKhoan()
+{   
+    return quanLyTaiKhoan;
+}
 
 QuanLyXe* BookingSystem::getQuanLyXe()
 {   
@@ -67,6 +72,10 @@ QuanLyXe* BookingSystem::getQuanLyXe()
 QuanLyVe* BookingSystem::getQuanLyVe()
 {   
     return quanLyVe;
+}
+User* BookingSystem::getCurrentUser()
+{
+    return currentUser;
 }
 //
 //MenuManager* BookingSystem::getCurrentMenu()
@@ -145,10 +154,20 @@ void BookingSystem::initData()
     auto dsVe = FileHandle::readVe("dsVe.dat");
     auto dsUser = FileHandle::readUser("dsUser.dat");
 
+    // Thêm tài khoản vào danh sách quản lý tài khoản
+    for (User it : dsUser)
+    {
+        quanLyTaiKhoan->addUser(new User(it));
+        //cout << it << "\n";
+    }
+
     cout << "Khoi tao du lieu thanh cong!\n";
     cout << "--------------------------------\n";
 
 }
+//
+//#include "windows.h";
+
 void BookingSystem::run()
 {
     cout << "\n=== He Thong Dat Ve Xe Khach ===\n";
@@ -164,6 +183,21 @@ void BookingSystem::run()
     while (true)
     {
         // INIT
+        //Sleep(1000);
+        //system("cls");
+
+        //Check User
+        if (currentUser == nullptr)
+        {
+            currentMenu->setState(new NotLoggedInState());
+        }
+        else
+        {
+            // ĐÃ ĐĂNG NHẬP
+                currentMenu->setState(new LoggedInState());
+        }
+        
+        
         currentMenu->displayMenu();
        
 
@@ -190,20 +224,33 @@ void BookingSystem::run()
             currentMenu->setState(new MenuQuanLyVe());
             break;
         }
+        // ============== ACCOUNT ==============
+        case 4:
+        {
+            currentMenu->setState(new MenuLogin());
+            break;
+        }
+        // ============== ADMIN MANAGEMENT ==============
+        case 9:
+        {
+            currentMenu->setState(new MenuQuanLy());
+            break;
+        }
         default:
             cout << "Lua chon khong hop le. Vui long thu lai.\n";
         }
 
         // SHOW MENU AFTER CHOOSE
+        system("cls");
         currentMenu->displayMenu();
     }
 }
 
 // Hủy tài nguyên
 BookingSystem::~BookingSystem() {
-    delete quanLyChuyenXe;
+   /* delete quanLyChuyenXe;
     delete quanLyXe;
-    delete quanLyVe;
+    delete quanLyVe;*/
     //delete thongKe;
 
     cout << "He thong da duoc huy!" << endl;
@@ -238,5 +285,17 @@ void BookingSystem::DeleteInstance()
     {
         delete quanLyVe;
         quanLyVe = NULL;
+    }
+
+    if (quanLyTaiKhoan)
+    {
+        delete quanLyTaiKhoan;
+        quanLyTaiKhoan = NULL;
+    }
+
+    if (currentUser)
+    {
+        delete currentUser;
+        currentUser = NULL;
     }
 }

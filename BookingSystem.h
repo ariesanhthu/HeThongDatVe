@@ -3,7 +3,9 @@
 #include "MenuState.h"
 #include "MenuManager.h"
 
+// màn hình
 #include <iostream>
+#include <cstdlib> 
 
 #include "QuanLyChuyenXe.h"
 #include "QuanLyXe.h"
@@ -32,12 +34,14 @@ private:
     static QuanLyVe* quanLyVe;
     
     //static QuanLyTaiKhoan* quanLyTaiKhoan;
-    QuanLyTaiKhoan* quanLyTaiKhoan;
+    static QuanLyTaiKhoan* quanLyTaiKhoan;
     
     static QuanLyChuyenXe* quanLyChuyenXe;
     
     static MenuManager* currentMenu;
     //ThongKe* thongKe;
+
+    static User* currentUser;
 
     BookingSystem();
 
@@ -55,19 +59,21 @@ public:
     static QuanLyVe* getQuanLyVe();
 
     static QuanLyChuyenXe* getQuanLyChuyenXe();
+    static QuanLyTaiKhoan* getQuanLyTaiKhoan();
     
     static MenuManager* getCurrentMenu();
 
     static void DeleteInstance();
 
+    static User* getCurrentUser();
+    static void setCurrentUser(User* user) {
+        currentUser = user;
+    }
+
     //Khởi tạo và thêm dữ liệu cho chương trình
     void initData();
     
     void run();
-
-    QuanLyTaiKhoan* getQuanLyTaiKhoan() {
-        return quanLyTaiKhoan;
-    }
 
     ~BookingSystem();
 };
